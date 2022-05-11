@@ -1,0 +1,10 @@
+.log {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    text-align: left;
+
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}

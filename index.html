@@ -1,0 +1,121 @@
+<!--
+    Copyright 2022 latel88 All Rights Reserved.
+-->
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="author" content="Copyright 2022 latel88 All Rights Reserved."/>
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="cache-control" content="no-store" />
+        <title>V.R.G.</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="style/touchpad.css">
+        <link rel="stylesheet" href="style/resizer.css">
+        <link rel="stylesheet" href="style/log.css">
+        <style>
+            html, body {
+                padding : 0px;
+                margin: 0px;
+                background-color: black;
+                touch-action: none;
+                
+                text-align: center;
+
+                -webkit-touch-callout:none;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                -webkit-text-size-adjust: none;
+
+                -webkit-user-select:none;
+                -moz-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+                
+                max-width : 100vw;
+                max-height : 100vh;
+
+                width: 100vw;
+                height: 100vh;
+
+                overflow: hidden;
+            }
+
+            body.no-init:before {
+                content: "please wait...";
+                position: relative;
+                font-family: "Meiryo";
+                font-size: 2em;
+                color: white;
+               
+                top: calc(50% - 2em / 2.0);
+            }
+            
+            body.error:before {
+                content: "Runtime not loaded.";
+                position: relative;
+                font-family: "Meiryo";
+                font-size: 2em;
+                color: red;
+               
+                top: calc(50% - 2em / 2.0);
+            }
+
+
+            #forceRefreshCanvas {
+                position: fixed;
+                z-index: 0;
+            }
+
+            #game {
+                z-index: 1;
+
+                /*
+                image-rendering : optimizeSpeed;
+                image-rendering : -moz-crisp-edges;
+                image-rendering : -o-crisp-edges;
+                image-rendering : optimize-contrast;
+                image-rendering : -webkit-optimize-contrast;
+                */
+                
+                image-rendering : -webkit-optimize-contrast;
+                image-rendering : -moz-crisp-edges;
+                image-rendering : -o-crisp-edges;
+                image-rendering : pixelated;
+                image-rendering : -ms-pixelated;
+                -ms-interpolation-mode : nearest-neighbor;
+            }
+        </style>
+        <script type="text/javascript">
+            window.onerror = (event) => {
+                alert(`<Script error>:${ event }`);
+            };
+
+            window.addEventListener("error", window.errorListener);
+
+            window.forceRenderRefresh = () => {
+                requestAnimationFrame(window.forceRenderRefresh);
+
+                const canvas = document.getElementById("forceRefreshCanvas");
+                const ctx = canvas.getContext("2d");
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        </script>
+        <script type="text/javascript" src="build.js"></script>
+        <script type="text/javascript" defer>
+            window.removeEventListener("error", window.errorListener);
+        </script>
+    </head>
+    <body onload="window.forceRenderRefresh()" ontouchend="document.fullscreenElement === null && document.body.requestFullscreen();" class="no-init">
+        <canvas id="forceRefreshCanvas" width="1" height="1"></canvas>
+        <div class="resizer">
+            <canvas id="game" style="width:100%;height:100%;"></canvas>
+        </div>
+        <div id="touchpad" class="touch-pad"></div>
+        <div id="log"></div>
+    </body>
+</html>

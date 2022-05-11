@@ -1,0 +1,12 @@
+{
+	"name": "VRG",
+	"version": "0.18.1",
+	"description": "",
+	"main": "./electron.prod.js",
+	"author": "",
+	"dependencies": {
+		"electron-log": "^4.4.1",
+		"greenworks": "file:../greenworks-0.1.0.tgz",
+		"v8-compile-cache": "^2.3.0"
+	}
+}
